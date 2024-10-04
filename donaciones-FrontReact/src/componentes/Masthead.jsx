@@ -12,6 +12,7 @@ const Masthead = () => {
                     <div className="col-lg-8 align-self-baseline">
                         <p className="text-white-75 mb-5">Te ayudamos a llegar mas lejos para poder lograr tus metas, te mostramos a cuantos podes ayudar.</p>
                         <a className="btn btn-primary btn-xl" href="#campañas">Estas son nuestras campañas</a>
+                       
                     </div>
                 </div>
                 

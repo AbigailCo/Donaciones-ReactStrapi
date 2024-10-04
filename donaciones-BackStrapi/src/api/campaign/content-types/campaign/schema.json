@@ -18,7 +18,7 @@
     "description": {
       "type": "text"
     },
-    "goals": {
+    "goal": {
       "type": "decimal"
     },
     "start_date": {
@@ -27,23 +27,7 @@
     "end_date": {
       "type": "date"
     },
-    "donations": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::donation.donation",
-      "mappedBy": "campaign"
-    },
-    "image": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": true
-    },
-    "link_youtube": {
+    "youtube_link": {
       "type": "string"
     }
   }

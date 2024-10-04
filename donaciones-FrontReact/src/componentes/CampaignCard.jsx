@@ -52,7 +52,7 @@ const CampaignCard = ({ campaign }) => {
         <Card.Title>{campaign.title}</Card.Title>
         <Card.Text>{campaign.description}</Card.Text>
         <Card.Text>
-          <strong>Meta:</strong> ${campaign.goals}
+          <strong>Meta:</strong> ${campaign.goal}
         </Card.Text>
         <Card.Text>
           <strong>Fechas:</strong> {campaign.start_date} a {campaign.end_date}

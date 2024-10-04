@@ -14,15 +14,10 @@ export interface ApiCampaignCampaign extends Struct.CollectionTypeSchema {
   attributes: {
     title: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    goals: Schema.Attribute.Decimal;
+    goal: Schema.Attribute.Decimal;
     start_date: Schema.Attribute.Date;
     end_date: Schema.Attribute.Date;
-    donations: Schema.Attribute.Relation<'oneToMany', 'api::donation.donation'>;
-    image: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-    link_youtube: Schema.Attribute.String;
+    youtube_link: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -51,7 +46,6 @@ export interface ApiDonationDonation extends Struct.CollectionTypeSchema {
   };
   attributes: {
     amount: Schema.Attribute.Decimal;
-    campaign: Schema.Attribute.Relation<'manyToOne', 'api::campaign.campaign'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
