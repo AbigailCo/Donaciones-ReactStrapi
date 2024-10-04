@@ -1,11 +1,11 @@
 // src/services/api.js
 import axios from 'axios';
+import {API_URL} from "./../config";
 
-const API_URL = 'http://localhost:1337/api';
 
 export const getCampaigns = async () => {
   try {
-    const response = await axios.get(`${API_URL}/campaigns`);
+    const response = await axios.get(`${API_URL}api/campaigns?populate=image`);
     return response.data; // Retorna los datos de las campañas
   } catch (error) {
     console.error('Error fetching campaigns:', error);
