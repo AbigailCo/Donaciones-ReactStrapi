@@ -12,6 +12,25 @@ export const getCampaigns = async () => {
     throw error; // Lanza el error para manejarlo en otro lugar
   }
 };
+export const searchCampaigns = async (term) => {
+  try {
+    const response = await axios.get(`${API_URL}/api/campaigns`, {
+      params: {
+        'filters[title][$containsi]': term // Filtro de título que contiene el término (insensible a mayúsculas/minúsculas)
+      }
+    });
+
+    const data = response.data;
+    if (data && data.data.length > 0) {
+      return data.data; // Devolver campañas filtradas
+    } else {
+      return []; // Si no hay coincidencias, devolver array vacío
+    }
+  } catch (error) {
+    console.error('Error al buscar campañas:', error);
+    return []; // Manejo de errores devolviendo array vacío
+  }
+};
 
 export const createDonation = async (donationData) => {
   try {

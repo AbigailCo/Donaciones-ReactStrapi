@@ -9,11 +9,11 @@ const CreateCampaign = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [youtubeLink, setYoutubeLink] = useState('');
-  const [images, setImages] = useState([]); // Cambiar a un array
+  const [image, setImage] = useState([]); // Cambiar a un array
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files); // Obtener todos los archivos seleccionados
-    setImages(files); // Actualizar el estado con los archivos seleccionados
+    setImage(files); // Actualizar el estado con los archivos seleccionados
   };
 
   const handleSubmit = async (e) => {
@@ -28,8 +28,8 @@ const CreateCampaign = () => {
     formData.append('data[youtube_link]', youtubeLink);
   
     // Agregar todas las imágenes al FormData
-    images.forEach((image) => {
-      formData.append('images', image); // Cambiar 'files.image' a 'images'
+    image.forEach((image) => {
+      formData.append('image', image); // Cambiar 'files.image' a 'images'
     });
 
     try {
