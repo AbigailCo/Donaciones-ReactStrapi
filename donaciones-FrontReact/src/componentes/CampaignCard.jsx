@@ -13,7 +13,7 @@ const getYouTubeId = (url) => {
 };
 
 const CampaignCard = ({ campaign }) => {
-  const youtubeId = getYouTubeId(campaign.link_youtube);
+  const youtubeId = getYouTubeId(campaign.youtube_link);
 
   return (
     <Card /* style={{ cursor: "pointer", width: "18rem", margin: "1rem" }} */>
@@ -30,7 +30,7 @@ const CampaignCard = ({ campaign }) => {
             <Carousel.Item key={index}>
               <img
                 className="d-block w-100"
-                src={`${API_URL}${image.path}`}
+                src={`${API_URL}${image.url}`}
                 alt={`Imagen de la campaña ${index}`}
                 style={{ height: "200px", objectFit: "cover" }}
               />

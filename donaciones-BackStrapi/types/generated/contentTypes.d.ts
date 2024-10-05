@@ -18,6 +18,10 @@ export interface ApiCampaignCampaign extends Struct.CollectionTypeSchema {
     start_date: Schema.Attribute.Date;
     end_date: Schema.Attribute.Date;
     youtube_link: Schema.Attribute.String;
+    image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

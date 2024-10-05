@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
+import { API_URL } from "./../config";
 
 const CreateCampaign = () => {
   const [title, setTitle] = useState('');
@@ -8,45 +9,51 @@ const CreateCampaign = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [youtubeLink, setYoutubeLink] = useState('');
+  const [images, setImages] = useState([]); // Cambiar a un array
+
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files); // Obtener todos los archivos seleccionados
+    setImages(files); // Actualizar el estado con los archivos seleccionados
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    // Asegúrate de que el 'goal' sea un número
-    const campaignData = {
-      data: {
-        title,
-        description,
-        goal: parseFloat(goal),
-        start_date: startDate,
-        end_date: endDate,
-        youtube_link: youtubeLink,
-      },
-    };
+    const formData = new FormData();
+    formData.append('data[title]', title);
+    formData.append('data[description]', description);
+    formData.append('data[goal]', parseFloat(goal));
+    formData.append('data[start_date]', startDate);
+    formData.append('data[end_date]', endDate);
+    formData.append('data[youtube_link]', youtubeLink);
   
+    // Agregar todas las imágenes al FormData
+    images.forEach((image) => {
+      formData.append('images', image); // Cambiar 'files.image' a 'images'
+    });
+
     try {
-      console.log('Datos de la campaña:', campaignData);
-  
-      const response = await fetch('http://localhost:1337/api/campaigns', {
+      console.log('Datos de la campaña:', formData);
+
+      const response = await fetch(`${API_URL}/api/campaigns`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(campaignData),
+        body: formData, // No incluir headers 'Content-Type' aquí
       });
-  
+
       if (response.ok) {
         alert('Campaña creada exitosamente');
       } else {
-        const errorResponse = await response.json(); // Captura la respuesta de error
+        const errorResponse = await response.json();
         console.error('Error:', errorResponse);
-        alert('Error al crear la campaña: ' + errorResponse.error.message); // Muestra el mensaje de error
+        alert('Error al crear la campaña: ' + errorResponse.error.message);
       }
     } catch (error) {
       console.error('Error de conexión:', error);
       alert('Error de conexión con el servidor');
     }
   };
+
   return (
-    
     <Container className="my-5">
       <h2>Crear Nueva Campaña</h2>
       <hr className="divider" />
@@ -97,6 +104,15 @@ const CreateCampaign = () => {
             required
           />
         </Form.Group>
+        <Form.Group controlId="formImage">
+          <Form.Label>Subir Imágenes</Form.Label>
+          <Form.Control
+            type="file"
+            accept="image/*" // Solo aceptar archivos de imagen
+            onChange={handleImageChange}
+            multiple // Agregar el atributo "multiple"
+          />
+        </Form.Group>
         <Form.Group controlId="formYoutubeLink">
           <Form.Label>Enlace de YouTube</Form.Label>
           <Form.Control
@@ -110,7 +126,6 @@ const CreateCampaign = () => {
         </Button>
       </Form>
     </Container>
-    
   );
 };
 
